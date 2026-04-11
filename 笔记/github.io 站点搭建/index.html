@@ -71,8 +71,6 @@
         <ul>
     <li class="toctree-l3"><a class="reference internal" href="#gh-pages">方案一：使用 gh-pages 分支（推荐，最简单）</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#_2"></a>
-    </li>
     <li class="toctree-l3"><a class="reference internal" href="#github-actions">方案二：使用 GitHub Actions 自动部署（更自动化）</a>
     </li>
         </ul>
@@ -125,7 +123,7 @@
                 <h1 id="githubio">github.io 站点搭建</h1>
 <ul>
 <li>
-<p>文档说明： 利用 <mark>MkDocs</mark> + <mark>GIthub</mark> 创建个人博客/网站</p>
+<p>文档说明：利用 <mark>MkDocs</mark> + <mark>GitHub</mark> 创建个人博客/网站</p>
 </li>
 <li>
 <p>文档结构：</p>
@@ -134,7 +132,7 @@
 <p><img title="" src="/assets/notes/mkdocs-structure.png" alt="文档结构示意图" width="632"></p>
 <hr />
 <h2 id="mkdocs">MkDocs</h2>
-<p>静态站点生成器，相关详细介绍参见 <a href="">mkdocs.org</a></p>
+<p>静态站点生成器，相关详细介绍参见 <a href="https://www.mkdocs.org/">MkDocs 官网</a>。</p>
 <h3 id="mkdocs_1">MkDocs的安装+初始化项目</h3>
 <ul>
 <li>
@@ -172,48 +170,40 @@ mkdocs serve
 <h2 id="git">Git</h2>
 <h3 id="git_1">Git大致流程</h3>
 <ol>
-<li>
-<p>初始化本地仓库</p>
-</li>
-<li>
-<p>添加文件到暂存区</p>
-</li>
-<li>
-<p>提交到本地仓库</p>
-</li>
-<li>
-<p>关联远程仓库</p>
-</li>
-<li>
-<p>推送到远程仓库</p>
-</li>
+<li>初始化本地仓库</li>
+<li>添加文件到暂存区</li>
+<li>提交到本地仓库</li>
+<li>关联远程仓库</li>
+<li>推送到远程仓库</li>
 </ol>
 <p>可按顺序执行以下命令：</p>
-<p>```bash
-  cd /path/to/your/folder</p>
-<p>git init</p>
-<p>git add .</p>
-<p>git commit -m "初始化项目"</p>
-<p>git remote add origin https://github.com/yourname/repo.git</p>
-<p>git push -u origin main
-  ```</p>
+<pre><code class="language-bash">cd /path/to/your/folder
+git init
+git add .
+git commit -m &quot;初始化项目&quot;
+git remote add origin https://github.com/yourname/repo.git
+git push -u origin main
+</code></pre>
 <h3 id="git_2">Git其他</h3>
 <ul>
 <li>查看当前状态</li>
 </ul>
-<p><code>git status</code></p>
+<pre><code class="language-bash">git status
+</code></pre>
 <ul>
 <li>忽略文件</li>
 </ul>
-<p>.gitignore</p>
+<p><code>.gitignore</code></p>
 <ul>
 <li>拉取</li>
 </ul>
-<p><code>git pull</code></p>
+<pre><code class="language-bash">git pull
+</code></pre>
 <ul>
 <li>强制推送</li>
 </ul>
-<p><code>git push --force</code></p>
+<pre><code class="language-bash">git push --force
+</code></pre>
 <hr />
 <h2 id="_1">站点维护</h2>
 <h3 id="gh-pages">方案一：使用 <code>gh-pages</code> 分支（推荐，最简单）</h3>
@@ -222,75 +212,74 @@ mkdocs serve
 <li>在本地项目目录执行部署命令</li>
 </ol>
 <p>执行下面的部署命令：</p>
-<p><code>bash
-  mkdocs gh-deploy</code></p>
+<pre><code class="language-bash">mkdocs gh-deploy
+</code></pre>
 <ol>
 <li>
 <p>修改GitHub Pages设置</p>
 </li>
 <li>
-<p>回到仓库的 <code>Settings</code> → <code>Pages</code></p>
+<p>回到仓库的 <code>Settings</code> -&gt; <code>Pages</code></p>
 </li>
+<li>将 <strong>Branch</strong> 从 <code>main</code> 改为 <code>gh-pages</code></li>
+<li>文件夹保持 <code>/ (root)</code></li>
 <li>
-<p>将 <strong>Branch</strong> 从 <code>main</code> 改为 <code>gh-pages</code></p>
-</li>
-<li>
-<p>文件夹保持 <code>/ (root)</code></p>
-</li>
-<li>
-<p>点击 <strong>Save</strong></p>
+<p>点击 <strong>Save</strong></p>
 </li>
 <li>
 <p><strong>等待 1-2 分钟</strong>，访问 <code>https://XXXX.github.io/</code> 就能看到了</p>
 </li>
 </ol>
-<h3 id="_2"></h3>
 <h3 id="github-actions">方案二：使用 GitHub Actions 自动部署（更自动化）</h3>
 <p><mark>（Deepseek提供，未测试）</mark></p>
 <p>如果你想保留 <code>main</code> 分支作为 Pages 源，可以用 Actions 自动构建。</p>
 <ol>
-<li>
-<p><strong>在项目根目录创建 <code>.github/workflows/deploy.yml</code></strong>：</p>
+<li><strong>在项目根目录创建 <code>.github/workflows/deploy.yml</code></strong>：</li>
+</ol>
 <p>文件内容可以写成：</p>
-<p>```yaml
-name: Deploy MkDocs to GitHub Pages</p>
-<p>on:
+<pre><code class="language-yaml">name: Deploy MkDocs to GitHub Pages
+
+on:
   push:
-    branches: [main]</p>
-<p>permissions:
-  contents: write</p>
-<p>jobs:
+    branches: [main]
+
+permissions:
+  contents: write
+
+jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4</p>
-<pre><code>  - name: Set up Python
-    uses: actions/setup-python@v5
-    with:
-      python-version: '3.x'
+      - uses: actions/checkout@v4
 
-  - name: Install MkDocs
-    run: pip install mkdocs
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
 
-  - name: Deploy
-    run: mkdocs gh-deploy --force
+      - name: Install MkDocs
+        run: pip install mkdocs
+
+      - name: Deploy
+        run: mkdocs gh-deploy --force
 </code></pre>
-<p>```</p>
-</li>
-<li>
-<p><strong>提交并推送</strong>：</p>
-</li>
+<ol>
+<li><strong>提交并推送</strong>：</li>
 </ol>
 <p>然后执行以下命令：</p>
-<p><code>bash
-  git add .github/workflows/deploy.yml
-  git commit -m "Add GitHub Actions workflow"
-  git push origin main</code></p>
+<pre><code class="language-bash">git add .github/workflows/deploy.yml
+git commit -m &quot;Add GitHub Actions workflow&quot;
+git push origin main
+</code></pre>
 <ol>
-<li><strong>确保 Pages 设置是</strong>：</li>
+<li>
+<p><strong>确保 Pages 设置是</strong>：</p>
+</li>
+<li>
+<p>Source: <code>Deploy from a branch</code></p>
+</li>
+<li>Branch: <code>gh-pages</code> / <code>/ (root)</code></li>
 </ol>
-<p>Source: <code>Deploy from a branch</code></p>
-<p>Branch: <code>gh-pages</code> / <code>/ (root)</code></p>
 <p>（因为 Actions 还是会推送到 <code>gh-pages</code> 分支）</p>
               
             </div>
