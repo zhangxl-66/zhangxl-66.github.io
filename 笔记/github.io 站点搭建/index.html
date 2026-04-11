@@ -131,7 +131,7 @@
 <p>文档结构：</p>
 </li>
 </ul>
-<p><img title="" src="../../assets/notes/mkdocs-structure.png" alt="文档结构示意图" width="632"></p>
+<p><img title="" src="/assets/notes/mkdocs-structure.png" alt="文档结构示意图" width="632"></p>
 <hr />
 <h2 id="mkdocs">MkDocs</h2>
 <p>静态站点生成器，相关详细介绍参见 <a href="">mkdocs.org</a></p>
@@ -167,7 +167,7 @@ mkdocs serve
 <p>其他主题资源，deepseek</p>
 </li>
 </ul>
-<p><img title="" src="../../assets/notes/mkdocs-theme.png" alt="MkDocs主题示意图" width="702"></p>
+<p><img title="" src="/assets/notes/mkdocs-theme.png" alt="MkDocs主题示意图" width="702"></p>
 <hr />
 <h2 id="git">Git</h2>
 <h3 id="git_1">Git大致流程</h3>
@@ -188,12 +188,15 @@ mkdocs serve
 <p>推送到远程仓库</p>
 </li>
 </ol>
-<p><code>cd /path/to/your/folder
-   git init
-   git add .
-   git commit -m "初始化项目"
-   git remote add origin https://github.com/yourname/repo.git
-   git push -u origin main</code></p>
+<p>可按顺序执行以下命令：</p>
+<p>```bash
+  cd /path/to/your/folder</p>
+<p>git init</p>
+<p>git add .</p>
+<p>git commit -m "初始化项目"</p>
+<p>git remote add origin https://github.com/yourname/repo.git</p>
+<p>git push -u origin main
+  ```</p>
 <h3 id="git_2">Git其他</h3>
 <ul>
 <li>查看当前状态</li>
@@ -218,7 +221,9 @@ mkdocs serve
 <ol>
 <li>在本地项目目录执行部署命令</li>
 </ol>
-<p><code>mkdocs gh-deploy</code></p>
+<p>执行下面的部署命令：</p>
+<p><code>bash
+  mkdocs gh-deploy</code></p>
 <ol>
 <li>
 <p>修改GitHub Pages设置</p>
@@ -244,22 +249,22 @@ mkdocs serve
 <p><mark>（Deepseek提供，未测试）</mark></p>
 <p>如果你想保留 <code>main</code> 分支作为 Pages 源，可以用 Actions 自动构建。</p>
 <ol>
-<li><strong>在项目根目录创建 <code>.github/workflows/deploy.yml</code></strong>：</li>
-</ol>
-<p>yaml</p>
-<pre><code>  name: Deploy MkDocs to GitHub Pages
-on:
- push:
- branches: [main]
-permissions:
- contents: write
-jobs:
- deploy:
- runs-on: ubuntu-latest
- steps:
- - uses: actions/checkout@v4
-
-  - name: Set up Python
+<li>
+<p><strong>在项目根目录创建 <code>.github/workflows/deploy.yml</code></strong>：</p>
+<p>文件内容可以写成：</p>
+<p>```yaml
+name: Deploy MkDocs to GitHub Pages</p>
+<p>on:
+  push:
+    branches: [main]</p>
+<p>permissions:
+  contents: write</p>
+<p>jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4</p>
+<pre><code>  - name: Set up Python
     uses: actions/setup-python@v5
     with:
       python-version: '3.x'
@@ -270,14 +275,17 @@ jobs:
   - name: Deploy
     run: mkdocs gh-deploy --force
 </code></pre>
-<ol>
-<li><strong>提交并推送</strong>：</li>
+<p>```</p>
+</li>
+<li>
+<p><strong>提交并推送</strong>：</p>
+</li>
 </ol>
-<p>bash</p>
-<pre><code>git add .github/workflows/deploy.yml
-git commit -m &quot;Add GitHub Actions workflow&quot;
-git push origin main
-</code></pre>
+<p>然后执行以下命令：</p>
+<p><code>bash
+  git add .github/workflows/deploy.yml
+  git commit -m "Add GitHub Actions workflow"
+  git push origin main</code></p>
 <ol>
 <li><strong>确保 Pages 设置是</strong>：</li>
 </ol>
