@@ -1,0 +1,19 @@
+site_name: zhangxl-66
+site_description: Clinical Data Programming & Analysis
+site_author: Xiaoli Zhang
+site_url: https://zhangxl-66.github.io/
+copyright: Copyright &copy; 2026 Xiaoli Zhang
+theme: 
+  name: readthedocs
+  language: zh
+
+
+
+# 导航结构
+nav:
+  - 首页: index.md
+  - 关于: 关于.md
+  - CDISC: CDISC/CDISC.md
+  - PYTHON: PYTHON/PYTHON.md
+  - R: R/R.md
+  - SAS: SAS/SAS.md
