@@ -1,0 +1,288 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>临床试验中的估计目标（Estimand）</title>
+  <style>
+    :root {
+      --ink: #243247;
+      --muted: #596a7d;
+      --accent: #176b69;
+      --line: #dce5eb;
+      --bg: #f3f6f8;
+      --soft: #eaf4f2;
+      --note: #fff7e6;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font: 16px/1.75 "Microsoft YaHei", "Noto Sans CJK SC", system-ui, sans-serif;
+    }
+    main {
+      width: min(1000px, calc(100% - 32px));
+      margin: 32px auto;
+      padding: clamp(20px, 4vw, 44px);
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      box-shadow: 0 10px 32px rgb(36 50 71 / 7%);
+    }
+    h1, h2, h3 { line-height: 1.35; }
+    h1 { margin: 0 0 12px; font-size: clamp(26px, 4vw, 36px); }
+    h2 {
+      margin: 34px 0 14px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--line);
+      font-size: 23px;
+    }
+    h3 { margin: 0 0 8px; font-size: 18px; }
+    p { margin: 8px 0; }
+    a { color: #075e9b; overflow-wrap: anywhere; }
+    .label { color: var(--accent); font-weight: 700; }
+    .muted, .small { color: var(--muted); }
+    .small { font-size: 14px; }
+    .callout, .note {
+      margin: 18px 0;
+      padding: 14px 18px;
+      border-radius: 9px;
+    }
+    .callout {
+      border-left: 4px solid var(--accent);
+      background: var(--soft);
+    }
+    .note {
+      border: 1px solid #efd99f;
+      background: var(--note);
+    }
+    .table-wrap { overflow-x: auto; }
+    table {
+      width: 100%;
+      min-width: 720px;
+      border-collapse: collapse;
+      margin: 14px 0;
+      font-size: 14px;
+    }
+    th, td {
+      padding: 11px 12px;
+      border: 1px solid var(--line);
+      text-align: left;
+      vertical-align: top;
+    }
+    th { background: #eef4f5; }
+    code {
+      padding: 2px 5px;
+      border-radius: 4px;
+      background: #f1f3f5;
+      font-family: Consolas, monospace;
+    }
+    li { margin: 6px 0; }
+    @media print {
+      body { background: #fff; }
+      main { width: 100%; margin: 0; border: 0; box-shadow: none; }
+    }
+  </style>
+</head>
+<body>
+<main>
+  <header>
+    <p class="label">临床试验统计知识总结</p>
+    <h1>临床试验中的估计目标（Estimand）</h1>
+    <p class="muted">估计目标帮助研究者明确：试验究竟要回答什么治疗问题，以及如何理解所报告的治疗效应。</p>
+  </header>
+
+  <div class="callout">
+    <strong>一句话理解：</strong>
+    估计目标是对“感兴趣的治疗效应”的精确定义。它不仅说明比较哪种治疗和测量什么结局，也要说明治疗开始后发生的事件（例如停药、使用救援治疗）如何纳入这个问题。
+  </div>
+
+  <section>
+    <h2>一、为什么需要估计目标</h2>
+    <p>患者随机进入治疗组后，可能停用研究药、换药、使用额外治疗，或发生其他影响结局解释的事件。若研究没有预先说清楚如何处理这些情况，不同分析可能回答不同问题，却被误认为是同一个“治疗效果”。</p>
+    <p>ICH E9(R1) 提供估计目标框架，目的是让临床问题、试验设计、数据收集、统计分析和结果解释保持一致。估计目标通常应在试验设计阶段预先确定。</p>
+  </section>
+
+  <section>
+    <h2>二、估计目标的五个组成部分</h2>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>组成部分</th>
+            <th>要回答的问题</th>
+            <th>示例</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>1. 治疗条件</strong></td>
+            <td>要比较哪些治疗策略？需要说明剂量、疗程、背景治疗及比较方式。</td>
+            <td>新药加标准治疗 vs. 安慰剂加标准治疗。</td>
+          </tr>
+          <tr>
+            <td><strong>2. 目标人群</strong></td>
+            <td>治疗效应要针对哪些患者？</td>
+            <td>符合入选标准并随机分组的某类疾病患者。</td>
+          </tr>
+          <tr>
+            <td><strong>3. 结局变量</strong></td>
+            <td>用什么指标衡量获益或风险？何时测量？</td>
+            <td>第24周相对基线的症状评分变化，或至疾病进展的时间。</td>
+          </tr>
+          <tr>
+            <td><strong>4. 伴发事件的处理</strong><br>Intercurrent events</td>
+            <td>治疗开始后出现停药、救援治疗等事件时，研究问题如何定义？</td>
+            <td>无论是否停药都继续纳入其结局；或估计假设未使用救援治疗时的结局。</td>
+          </tr>
+          <tr>
+            <td><strong>5. 群体层面的汇总指标</strong></td>
+            <td>如何概括两种治疗之间的差异？</td>
+            <td>均值差、风险比、风险差、优势比、风险率比（HR）等。</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p>五项合在一起，才构成对治疗效应的完整描述。单独说“主要终点是第24周评分”通常还不够，因为尚未说明目标人群、伴发事件处理和最终比较指标。</p>
+  </section>
+
+  <section>
+    <h2>三、什么是伴发事件</h2>
+    <p>伴发事件是治疗开始后发生、并影响目标结局的解释或是否能够测量的事件。例如：</p>
+    <ul>
+      <li>停止或中断研究治疗；</li>
+      <li>使用救援药物或额外治疗；</li>
+      <li>转换到另一种治疗；</li>
+      <li>疾病进展后接受后续治疗；</li>
+      <li>对某些非生存结局而言，死亡可能导致后续结局测量不存在。</li>
+    </ul>
+    <div class="note">
+      <strong>注意区分：</strong>漏访、失访或数据未收集通常属于缺失数据问题，本身不自动等同于伴发事件。患者停用研究药也不意味着应该停止收集结局数据；是否继续随访应与估计目标相匹配。
+    </div>
+  </section>
+
+  <section>
+    <h2>四、处理伴发事件的五种策略</h2>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>策略</th>
+            <th>它回答的问题</th>
+            <th>例子</th>
+            <th>解释时的重点</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>治疗策略（Treatment policy）</strong></td>
+            <td>不论伴发事件是否发生，治疗组间的结局差异是多少？</td>
+            <td>患者停用研究药或使用救援治疗后，仍继续测量结局，并按原随机组比较。</td>
+            <td>反映整个治疗策略及其后续影响；需要尽可能收集事件发生后的结局数据。对导致结局不可能存在的终末事件，不能简单地忽略。</td>
+          </tr>
+          <tr>
+            <td><strong>假设策略（Hypothetical）</strong></td>
+            <td>如果某个伴发事件没有发生，治疗效果会怎样？</td>
+            <td>估计“假如患者没有使用救援治疗”时的结局。</td>
+            <td>估计的是未实际观察到的假设情境，依赖模型和不可验证假设；必须清楚说明假设的具体含义。</td>
+          </tr>
+          <tr>
+            <td><strong>复合变量策略（Composite variable）</strong></td>
+            <td>把伴发事件本身并入结局，作为疗效或失败的一部分。</td>
+            <td>将“死亡或住院”合并为复合终点；或将使用救援治疗定义为治疗失败。</td>
+            <td>避免对事件发生后的结局作某些假设，但复合结局中的每个组成部分应有临床意义，且组合方式要易于解释。</td>
+          </tr>
+          <tr>
+            <td><strong>治疗期间策略（While on treatment）</strong></td>
+            <td>患者仍在接受治疗期间，结局如何变化？</td>
+            <td>只使用停药前收集的症状评分评估治疗期间效果。</td>
+            <td>可能忽略停药后的疗效或伤害；若治疗影响停药时间，只看治疗期间数据可能不能完整反映总体获益风险。</td>
+          </tr>
+          <tr>
+            <td><strong>主层策略（Principal stratum）</strong></td>
+            <td>在某个伴发事件无论分配哪种治疗都会以相同方式发生的一类患者中，治疗效果如何？</td>
+            <td>关注“无论分到哪组都会停药”的潜在人群中的治疗效应。</td>
+            <td>人群由不同治疗条件下的潜在事件状态定义，通常不能直接观察，估计和解释都较复杂。</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p>一个试验可以针对不同伴发事件采用不同策略。例如，对停药采用治疗策略，对救援药采用假设策略。关键是预先明确“每个事件分别如何处理”。</p>
+  </section>
+
+  <section>
+    <h2>五、一个简化示例</h2>
+    <p><strong>试验问题：</strong>比较新药与对照药对慢性疾病患者症状的影响。主要结局为随机分组后第24周症状评分相对基线的变化。部分患者可能停用研究药，或使用救援药。</p>
+    <ul>
+      <li><strong>治疗条件：</strong>新药方案 vs. 对照方案。</li>
+      <li><strong>目标人群：</strong>符合方案条件并随机入组的患者。</li>
+      <li><strong>结局变量：</strong>第24周症状评分相对基线的变化。</li>
+      <li><strong>伴发事件策略：</strong>若采用治疗策略，停药或使用救援药后仍继续收集结局；若采用假设策略，则回答“假如没有使用救援药，结果会怎样”。</li>
+      <li><strong>汇总指标：</strong>两组第24周平均变化的差。</li>
+    </ul>
+    <p>两种策略可能得到不同结果，因为它们回答的是不同的临床问题。结果差异不一定表示某种统计方法“算错了”，而可能是估计目标本身不同。</p>
+  </section>
+
+  <section>
+    <h2>六、估计目标、估计量与估计值</h2>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>术语</th><th>含义</th><th>类比</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>估计目标（Estimand）</strong></td>
+            <td>要估计的治疗效应是什么？</td>
+            <td>研究问题或目标参数。</td>
+          </tr>
+          <tr>
+            <td><strong>估计量（Estimator）</strong></td>
+            <td>用什么统计方法从样本数据估计目标？</td>
+            <td>计算规则或统计程序。</td>
+          </tr>
+          <tr>
+            <td><strong>估计值（Estimate）</strong></td>
+            <td>实际数据分析得到的数值及其不确定性。</td>
+            <td>例如组间均值差及其95%置信区间。</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p>估计目标不是某一个统计模型，也不等同于某个分析集名称。随机化、意向治疗分析、缺失数据处理和统计模型都很重要，但它们不能代替对临床问题本身的定义。</p>
+  </section>
+
+  <section>
+    <h2>七、与主要分析和敏感性分析的关系</h2>
+    <ul>
+      <li><strong>主要分析：</strong>应使用与主要估计目标相匹配的估计方法，并在方案和统计分析计划中预先说明。</li>
+      <li><strong>敏感性分析：</strong>检验主要分析的结论在合理改变关键假设或处理方法后是否仍然稳健，通常围绕同一个估计目标。</li>
+      <li><strong>补充分析：</strong>可以回答不同的估计目标或临床问题；解释时应说明它与主要分析的目标是否相同。</li>
+      <li><strong>缺失数据：</strong>需要针对估计目标和数据缺失原因选择、说明和检验假设。失访不能通过简单删除患者来自动解决。</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>八、常见误区</h2>
+    <ol>
+      <li>把估计目标当作统计模型或主要终点的同义词。</li>
+      <li>认为所有停药、救援治疗都应该一律排除或一律忽略。</li>
+      <li>把停药后的数据都当作无用数据，忽视治疗策略问题可能需要持续随访。</li>
+      <li>只写“按意向治疗分析”，却没有说明治疗改变或救援治疗如何影响临床问题。</li>
+      <li>把敏感性分析和主要估计目标混为一谈，或将回答不同问题的分析直接比较。</li>
+      <li>对于生存结局和非生存结局使用相同的事件处理逻辑。死亡可能是生存结局本身，也可能使其他结局无法定义，需按目标结局具体处理。</li>
+    </ol>
+  </section>
+
+  <section>
+    <h2>参考资料</h2>
+    <ol>
+      <li><a href="https://database.ich.org/sites/default/files/E9-R1_Step4_Guideline_2019_1203.pdf">ICH E9(R1)：临床试验中的估计目标与敏感性分析补充指南（官方文本）</a>。本文定义和五类伴发事件策略的主要依据。</li>
+      <li><a href="https://www.ema.europa.eu/en/documents/scientific-guideline/ich-e9-r1-addendum-estimands-and-sensitivity-analysis-clinical-trials-guideline-statistical-principles-clinical-trials-step-5_en.pdf">欧洲药品管理局（EMA）：ICH E9(R1) Step 5 指南</a>。</li>
+      <li><a href="https://www.fda.gov/regulatory-information/search-fda-guidance-documents/e9r1-statistical-principles-clinical-trials-addendum-estimands-and-sensitivity-analysis-clinical">美国 FDA：E9(R1) Estimands and Sensitivity Analysis in Clinical Trials</a>。</li>
+    </ol>
+  </section>
+</main>
+</body>
+</html>
