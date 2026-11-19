@@ -110,7 +110,13 @@ function search (query) {
   }
 
   var resultDocuments = [];
-  var results = index.search(query);
+  var queryTerms = lunr.zh.tokenizer(query);
+  if (!queryTerms.length) {
+    return [];
+  }
+  var results = index.search(queryTerms.map(function (token) {
+    return '+' + token.toString();
+  }).join(' '));
   for (var i=0; i < results.length; i++){
     var result = results[i];
     doc = documents[result.ref];
