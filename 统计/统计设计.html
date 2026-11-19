@@ -1,0 +1,374 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>临床试验中常见的统计设计</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #203047;
+      --muted: #52657a;
+      --accent: #176b87;
+      --line: #dce5ec;
+      --panel: #f3f7fa;
+      --tip: #eaf4f5;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: #f7f9fb;
+      color: var(--ink);
+      font: 16px/1.75 "Segoe UI", "Microsoft YaHei", sans-serif;
+    }
+    main {
+      max-width: 1000px;
+      margin: 32px auto;
+      padding: 36px 42px;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+    }
+    h1, h2, h3 { line-height: 1.35; }
+    h1 { margin-top: 0; font-size: 2rem; }
+    h2 {
+      margin-top: 2.2em;
+      padding-bottom: .4em;
+      border-bottom: 1px solid var(--line);
+      color: var(--accent);
+      font-size: 1.4rem;
+    }
+    h3 { margin-bottom: .35em; font-size: 1.08rem; }
+    p { margin: .55em 0; }
+    ul { padding-left: 1.35em; }
+    li { margin: .25em 0; }
+    .intro, .note {
+      padding: 14px 18px;
+      border-radius: 9px;
+      background: var(--panel);
+    }
+    .note { background: var(--tip); }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+      gap: 14px;
+    }
+    .card {
+      padding: 16px 18px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+    }
+    .tag {
+      display: inline-block;
+      margin: 0 0 5px;
+      color: var(--muted);
+      font-size: .88rem;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 14px 0;
+    }
+    th, td {
+      padding: 10px 12px;
+      border: 1px solid var(--line);
+      text-align: left;
+      vertical-align: top;
+    }
+    th { background: var(--panel); }
+    a { color: #075f83; overflow-wrap: anywhere; }
+    .refs li { margin-bottom: .6em; }
+    @media (max-width: 640px) {
+      main { margin: 0; padding: 24px 18px; border: 0; border-radius: 0; }
+      h1 { font-size: 1.65rem; }
+      table { font-size: .92rem; }
+    }
+  </style>
+</head>
+<body>
+<main>
+  <h1>临床试验中常见的统计设计</h1>
+
+  <p class="intro">
+    临床试验设计不是单一的分类清单。一个研究可以同时采用多种设计特征：
+    例如，试验可以是“优效性目的 + 多中心平行组 + 个体随机 + 双盲”，
+    也可以是在主方案下开展的适应性平台试验。以下按不同设计维度整理；
+    各维度彼此可能交叉，并非互斥选项。
+  </p>
+
+  <h2>一、按研究目的划分</h2>
+  <div class="grid">
+    <article class="card">
+      <h3>优效性设计（superiority）</h3>
+      <p><strong>基本结构：</strong>比较试验治疗与对照，目标是判断试验治疗是否优于对照。对照可以是安慰剂、标准治疗或其他合适方案。</p>
+      <p><strong>适用情境：</strong>希望证明新治疗带来更好的疗效，或在某个预先确定的临床方面优于对照。</p>
+      <p><strong>设计考虑：</strong>需要明确比较对象以及“优于”的临床含义；选择何种对照会影响研究所回答的问题。</p>
+    </article>
+    <article class="card">
+      <h3>非劣效性设计（non-inferiority）</h3>
+      <p><strong>基本结构：</strong>通常与已有有效治疗作比较，目标是排除新治疗比对照差到预先设定、不可接受的程度。</p>
+      <p><strong>适用情境：</strong>新治疗可能在给药便利性、耐受性或其他方面有潜在优势，而不一定需要证明疗效更好。</p>
+      <p><strong>设计考虑：</strong>非劣效界值必须有明确的临床依据并在设计中预先确定。非劣效不等于等效，也不意味着两种治疗完全相同。[2]</p>
+    </article>
+    <article class="card">
+      <h3>等效性设计（equivalence）</h3>
+      <p><strong>基本结构：</strong>目标是证明两种治疗的差异落在预先设定的、临床可接受的上下界之内。</p>
+      <p><strong>适用情境：</strong>研究问题关心的是两种治疗在临床上是否足够接近，而不是其中一种是否更好。</p>
+      <p><strong>设计考虑：</strong>上下界都需要有临床依据。它与非劣效的研究问题不同：非劣效关注是否“没有差到不可接受”，等效性则要求差异在两侧都受限。</p>
+    </article>
+    <article class="card">
+      <h3>剂量探索与剂量比较设计</h3>
+      <p><strong>基本结构：</strong>设置多个剂量水平，或按预先规定的规则逐步考察剂量，以了解剂量与效果、耐受性之间的关系，并为后续研究选择剂量。</p>
+      <p><strong>常见思路：</strong>固定剂量组比较、队列递增设计，以及基于模型或规则进行剂量递增的设计。</p>
+      <p><strong>设计考虑：</strong>不同方法对剂量递增、暂停或停止的规则不同；所选方法应与研究阶段和可获得的信息相匹配。</p>
+    </article>
+  </div>
+
+  <h2>二、按对照与分配方式划分</h2>
+  <div class="grid">
+    <article class="card">
+      <h3>随机对照设计</h3>
+      <p><strong>基本结构：</strong>通过随机分配将参与者（或其他随机化单位）分到不同治疗组，以减少已知和未知因素造成的组间系统差异。</p>
+      <p><strong>适用情境：</strong>适用于希望进行组间因果比较、且随机分配在实际和临床上可行的研究。</p>
+      <p><strong>设计考虑：</strong>随机化单位可以是个人、家庭、机构或其他群体。分层、区组等属于随机分配的安排方式，不是与平行组、交叉设计并列的试验架构。</p>
+    </article>
+    <article class="card">
+      <h3>单臂与非随机对照设计</h3>
+      <p><strong>基本结构：</strong>单臂设计中所有参与者接受同一试验方案；非随机对照设计则以非随机方式形成比较组。</p>
+      <p><strong>适用情境：</strong>有时用于早期探索、罕见疾病或随机对照难以实施的情形。</p>
+      <p><strong>设计考虑：</strong>缺少随机同期对照时，组间差异可能来自病情、入选方式、时间变化或其他因素，因而比较的解释通常更受限制。</p>
+    </article>
+    <article class="card">
+      <h3>安慰剂对照、活性对照与附加治疗设计</h3>
+      <p><strong>安慰剂对照：</strong>试验治疗与外观或安排相似的无活性对照比较；研究问题通常是治疗相对于安慰剂的效果。</p>
+      <p><strong>活性对照：</strong>试验治疗与已有治疗比较；适合研究新治疗相对于现有方案的表现。</p>
+      <p><strong>附加治疗（add-on）：</strong>两组都接受基础治疗，其中一组额外接受试验治疗，用于评价在基础治疗之上的增量作用。</p>
+      <p><strong>设计考虑：</strong>对照类型应与研究目的相符；上述安排可以与随机、平行组或其他架构结合。</p>
+    </article>
+    <article class="card">
+      <h3>外部对照设计</h3>
+      <p><strong>基本结构：</strong>试验组与试验之外已有的对照信息比较，例如既往研究或常规诊疗数据，而不是同期随机分配的对照组。</p>
+      <p><strong>适用情境：</strong>随机对照难以开展，或存在可用外部数据的特殊情形。</p>
+      <p><strong>设计考虑：</strong>外部数据与试验组在患者特征、治疗背景、时间和资料采集方式上的差异可能造成偏倚；其可比性需要审慎判断。</p>
+    </article>
+  </div>
+
+  <h2>三、按治疗组结构与随机化单位划分</h2>
+  <div class="grid">
+    <article class="card">
+      <h3>平行组设计（parallel-group）</h3>
+      <p><strong>基本结构：</strong>每位参与者被分到一个治疗组，并在研究期间接受所分配的治疗；两组或多组同期比较。这是确认性临床试验中常见的架构。[1]</p>
+      <p><strong>适用情境：</strong>适用范围广，尤其适合治疗作用可能持续、疾病会随时间变化，或不适合让同一参与者依次尝试多种治疗的情况。</p>
+      <p><strong>设计考虑：</strong>组间比较依赖组别之间的可比性；可与优效性、非劣效性、等效性及不同对照类型结合。</p>
+    </article>
+    <article class="card">
+      <h3>交叉设计（crossover）</h3>
+      <p><strong>基本结构：</strong>同一参与者按随机顺序接受两种或多种治疗；参与者在不同治疗阶段之间转换，因此可作为自身对照。治疗阶段之间有时安排洗脱期。[1]</p>
+      <p><strong>适用情境：</strong>更适合病情相对稳定、治疗作用可逆、且前一阶段治疗不会持续影响后一阶段的情形。</p>
+      <p><strong>设计考虑：</strong>需要评估残留作用、疾病随时间变化和阶段顺序的影响；若治疗作用持久或病情快速变化，交叉设计可能不合适。</p>
+    </article>
+    <article class="card">
+      <h3>析因设计（factorial）</h3>
+      <p><strong>基本结构：</strong>在同一研究中组合考察两个或多个干预因素。以 2×2 设计为例，可形成“仅 A”“仅 B”“A 与 B 联合”“均不使用”四种组合。[1]</p>
+      <p><strong>适用情境：</strong>希望在一个研究中同时考察多个干预，或研究它们联合使用时的表现。</p>
+      <p><strong>设计考虑：</strong>若不同治疗之间可能相互影响，设计需要考虑这种交互作用；不能仅因采用析因结构就假设各治疗作用彼此独立。</p>
+    </article>
+    <article class="card">
+      <h3>整群随机设计（cluster-randomized）</h3>
+      <p><strong>基本结构：</strong>随机分配单位是群体而非个人，例如诊所、学校、病区或社区；群体中的个体接受该群体所分配的方案。</p>
+      <p><strong>适用情境：</strong>干预施加在群体层面，或个体随机分配容易造成组间干预扩散时。</p>
+      <p><strong>设计考虑：</strong>群体内成员可能具有相似性；设计时要明确群体边界、随机化单位和个体如何进入群体。整群随机可以采用平行组等不同时间安排。</p>
+    </article>
+    <article class="card">
+      <h3>阶梯楔形整群设计（stepped-wedge）</h3>
+      <p><strong>基本结构：</strong>不同群体按随机确定的顺序和时间，从对照条件逐步转为干预条件；最终所有群体都接受干预。[3]</p>
+      <p><strong>适用情境：</strong>干预以群体为单位实施，且计划分阶段推出时，有时会考虑这种安排。</p>
+      <p><strong>设计考虑：</strong>群体转换时间与日历时间相连，因此需要特别关注随时间发生的变化；它并不是简单地把普通整群平行设计换一种画法。</p>
+    </article>
+    <article class="card">
+      <h3>配对与匹配设计</h3>
+      <p><strong>基本结构：</strong>先按重要特征将参与者、群体或身体部位配成相似单元，再在配对内安排不同治疗或比较条件。</p>
+      <p><strong>适用情境：</strong>有可合理配对的单位，且希望在设计阶段利用这种对应关系进行比较时。</p>
+      <p><strong>设计考虑：</strong>配对因素应与研究问题有关；配对不是独立于平行组等架构的总类别，而是可以嵌入其他设计的安排。</p>
+    </article>
+    <article class="card">
+      <h3>自身对照与分身设计</h3>
+      <p><strong>基本结构：</strong>同一参与者的不同部位分别接受不同干预，例如左右眼或身体两侧，形成个体内比较。</p>
+      <p><strong>适用情境：</strong>治疗可在不同部位分别实施，且部位之间不会明显互相影响时。</p>
+      <p><strong>设计考虑：</strong>需考虑左右或部位差异、干预是否会扩散，以及一个部位的治疗是否影响另一个部位。</p>
+    </article>
+    <article class="card">
+      <h3>N-of-1 设计</h3>
+      <p><strong>基本结构：</strong>针对单个参与者，在多个治疗阶段中以随机顺序反复比较不同治疗，通常关注该参与者自身的治疗反应。</p>
+      <p><strong>适用情境：</strong>病情相对稳定、治疗作用较快且可逆，并且个体内重复比较有意义时。</p>
+      <p><strong>设计考虑：</strong>需要避免阶段之间的残留作用，并确认个体内观察能够回答目标问题；单个参与者的结果不能自动推广到其他人群。</p>
+    </article>
+  </div>
+
+  <h2>四、按治疗路径与入组策略划分</h2>
+  <div class="grid">
+    <article class="card">
+      <h3>随机撤药设计（randomized withdrawal）</h3>
+      <p><strong>基本结构：</strong>先让所有参与者接受一段共同治疗，再将符合预设条件者随机分到继续治疗或撤除、转换治疗等组别。</p>
+      <p><strong>适用情境：</strong>研究问题关注已经接受治疗或对治疗有反应的人群，继续治疗相对于撤药是否有益。</p>
+      <p><strong>设计考虑：</strong>研究结果主要适用于进入随机阶段的人群，不一定适用于所有最初入组者。</p>
+    </article>
+    <article class="card">
+      <h3>富集设计（enrichment）</h3>
+      <p><strong>基本结构：</strong>按预先确定的特征筛选或分层纳入人群，例如某个生物标志物、既往治疗反应或疾病特征。</p>
+      <p><strong>适用情境：</strong>研究问题针对某个明确亚群，或希望在目标亚群中评价治疗。</p>
+      <p><strong>设计考虑：</strong>入组人群越有针对性，研究结论适用的范围也越需要限定；筛选特征应与研究问题相符。</p>
+    </article>
+    <article class="card">
+      <h3>多臂设计（multi-arm）</h3>
+      <p><strong>基本结构：</strong>在同一试验中设置多个试验治疗组，通常与一个或多个对照组比较。</p>
+      <p><strong>适用情境：</strong>希望在共同研究框架下比较多个候选治疗、剂量或治疗组合。</p>
+      <p><strong>设计考虑：</strong>多个治疗组可以与平行组、随机化和适应性设计结合；多臂并不意味着各治疗组之间必然互相比较。</p>
+    </article>
+    <article class="card">
+      <h3>延迟启动设计（delayed-start）</h3>
+      <p><strong>基本结构：</strong>不同组在不同时间开始接受试验治疗，例如一组较早开始，另一组先处于对照条件、之后再开始治疗。</p>
+      <p><strong>适用情境：</strong>研究问题需要观察治疗开始时间或治疗作用持续情况时，可能考虑这种安排。</p>
+      <p><strong>设计考虑：</strong>研究期间的自然病程、时间效应和治疗作用是否可逆，会影响这种设计能否回答目标问题。</p>
+    </article>
+    <article class="card">
+      <h3>序贯多重随机设计（SMART）</h3>
+      <p><strong>基本结构：</strong>参与者在治疗路径中的多个决策点接受随机分配；后续分配可能取决于早期治疗反应或其他预先规定的状态。</p>
+      <p><strong>适用情境：</strong>研究问题关注多阶段、按反应调整的治疗策略，而非单一治疗的简单组间比较。</p>
+      <p><strong>设计考虑：</strong>需要事先定义决策点、可选治疗及触发后续安排的条件。</p>
+    </article>
+  </div>
+
+  <h2>五、按中期决策与研究架构划分</h2>
+  <div class="grid">
+    <article class="card">
+      <h3>组序贯设计（group-sequential）</h3>
+      <p><strong>基本结构：</strong>在研究进行中按预定计划查看累积信息，并依据预先设定的规则决定继续、提前停止或采取其他规定行动。</p>
+      <p><strong>适用情境：</strong>希望研究能在出现明确证据或无望继续时较早作出预定决策。</p>
+      <p><strong>设计考虑：</strong>中期查看的时间与决策规则要在设计阶段明确。组序贯设计常被视为适应性设计的一类，但不同文献对分类用语可能略有差异。[4]</p>
+    </article>
+    <article class="card">
+      <h3>适应性设计（adaptive design）</h3>
+      <p><strong>基本结构：</strong>根据研究过程中累积的信息，对一个或多个预先指定的设计方面作出调整；调整规则需事先规划，而非临时随意改变。[4]</p>
+      <p><strong>常见调整方向：</strong>选择继续研究的治疗组、调整治疗组构成、停止无效组，或在符合预设条件时调整其他设计安排。</p>
+      <p><strong>设计考虑：</strong>适应性设计需要清楚说明哪些信息会触发调整、允许怎样调整，以及如何保护试验的整体可靠性。</p>
+    </article>
+    <article class="card">
+      <h3>无缝设计（seamless design）</h3>
+      <p><strong>基本结构：</strong>将通常分开进行的研究阶段衔接在同一总体方案中，例如先进行候选治疗筛选，再继续评价选出的治疗。</p>
+      <p><strong>适用情境：</strong>希望在一个连贯的研究框架中完成从探索到进一步验证的任务时，可能考虑这种安排。</p>
+      <p><strong>设计考虑：</strong>需事先明确阶段衔接的条件，以及前一阶段参与者或数据是否进入后续阶段。</p>
+    </article>
+    <article class="card">
+      <h3>主方案设计（master protocol）</h3>
+      <p><strong>基本结构：</strong>在一个总体方案下运行多个相互关联的子研究，以共享部分研究框架或流程。篮式、伞式和平台试验是常见类型。[5]</p>
+      <p><strong>设计考虑：</strong>子研究之间可能共享部分对照或基础架构，但每个子研究所回答的问题、研究人群和治疗比较仍需清晰界定。</p>
+    </article>
+    <article class="card">
+      <h3>篮式试验（basket trial）</h3>
+      <p><strong>基本结构：</strong>围绕一个共同的治疗靶点、生物标志物或其他特征，在多个疾病类型或人群中考察同一治疗或治疗组合。[5]</p>
+      <p><strong>适用情境：</strong>研究假设认为不同疾病或亚群中的某一共同特征与治疗相关时。</p>
+      <p><strong>设计考虑：</strong>不同疾病亚群是否能放在同一框架下研究，需要有科学依据；不能仅因共享某项标志物就默认各亚群相同。</p>
+    </article>
+    <article class="card">
+      <h3>伞式试验（umbrella trial）</h3>
+      <p><strong>基本结构：</strong>聚焦一种疾病或组织学类型，根据不同生物标志物或亚型，将参与者分配到不同的匹配治疗子研究。[5]</p>
+      <p><strong>适用情境：</strong>同一种疾病中存在多个可区分的亚型，且不同亚型对应不同候选治疗时。</p>
+    </article>
+    <article class="card">
+      <h3>平台试验（platform trial）</h3>
+      <p><strong>基本结构：</strong>在持续运行的总体研究框架中，按预先设定的规则加入或移除治疗组，持续评价一种疾病或临床问题下的多个候选治疗。</p>
+      <p><strong>适用情境：</strong>候选治疗会随时间变化，且希望多个治疗在共同框架下依次或同时接受评价时。</p>
+      <p><strong>设计考虑：</strong>平台设计常具有适应性，也可与主方案、共同对照或多臂设计结合；“平台”不是与“适应性”互斥的分类。</p>
+    </article>
+    <article class="card">
+      <h3>贝叶斯设计框架</h3>
+      <p><strong>基本结构：</strong>使用既有信息与当前研究中逐步积累的信息共同支持设计决策；可与剂量探索、多臂、组序贯或适应性设计结合。</p>
+      <p><strong>适用情境：</strong>研究设计需要系统整合先验知识与新观察信息时，可能采用这种框架。</p>
+      <p><strong>设计考虑：</strong>应清楚说明先验信息来源及其如何进入设计决策。贝叶斯方法是一类统计框架，不是某一种固定的试验结构。</p>
+    </article>
+  </div>
+
+  <h2>六、横向比较：选设计时主要看什么</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>设计问题</th>
+        <th>主要考虑</th>
+        <th>可能涉及的设计</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>要回答什么治疗问题？</td>
+        <td>是要证明更好、排除不可接受的差异，还是证明足够接近？</td>
+        <td>优效性、非劣效性、等效性</td>
+      </tr>
+      <tr>
+        <td>治疗如何分配？</td>
+        <td>随机化单位是个人还是群体？同一人是否接受多个治疗？</td>
+        <td>平行组、交叉、整群随机、自身对照、N-of-1</td>
+      </tr>
+      <tr>
+        <td>要同时评价几个因素或治疗？</td>
+        <td>治疗之间是否可能相互影响？是否需要共同对照或多个子研究？</td>
+        <td>析因、多臂、篮式、伞式、平台</td>
+      </tr>
+      <tr>
+        <td>治疗是否会按中期信息调整？</td>
+        <td>调整条件、决策时间和可采取的行动能否事先明确？</td>
+        <td>组序贯、适应性、无缝、平台、SMART</td>
+      </tr>
+      <tr>
+        <td>研究人群如何界定？</td>
+        <td>目标是广泛人群，还是具有特定标志、反应或治疗经历的亚群？</td>
+        <td>富集、随机撤药、篮式、伞式</td>
+      </tr>
+      <tr>
+        <td>是否存在时间或治疗残留影响？</td>
+        <td>病情是否稳定，治疗作用是否可逆，群体是否分阶段转换？</td>
+        <td>交叉、N-of-1、阶梯楔形、延迟启动</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p class="note">
+    这些设计名称处于不同分类层级：优效性、非劣效性和等效性描述研究目的；
+    平行组、交叉和整群随机描述治疗分配或比较结构；
+    适应性、篮式、伞式和平台则描述研究如何组织或随信息变化。
+    因此，实际方案往往是多个设计特征的组合。上表仅用于理解设计选择维度，
+    不构成针对具体研究的设计建议。
+  </p>
+
+  <h2>参考资料</h2>
+  <ol class="refs">
+    <li>
+      国际人用药品注册技术协调会（ICH），
+      <cite>E9：临床试验统计学指导原则</cite>。涉及平行组、交叉和析因设计。
+      <a href="https://database.ich.org/sites/default/files/E9_Guideline.pdf">查看原文</a>
+    </li>
+    <li>
+      美国食品药品监督管理局（FDA），
+      <cite>Non-Inferiority Clinical Trials to Establish Effectiveness</cite>。
+      <a href="https://www.fda.gov/regulatory-information/search-fda-guidance-documents/non-inferiority-clinical-trials">查看原文</a>
+    </li>
+    <li>
+      Hemming 等，
+      <cite>Reporting of stepped wedge cluster randomised trials: extension of the CONSORT 2010 statement</cite>，
+      BMJ，2018。
+      <a href="https://www.bmj.com/content/bmj/363/bmj.k1614.full.pdf">查看原文</a>
+    </li>
+    <li>
+      美国食品药品监督管理局（FDA），
+      <cite>Adaptive Designs for Clinical Trials of Drugs and Biologics</cite>。
+      <a href="https://www.fda.gov/files/drugs/published/28545126fnl.pdf">查看原文</a>
+    </li>
+    <li>
+      美国食品药品监督管理局（FDA），
+      <cite>FDA Modernizes Clinical Trials with Master Protocols</cite>。
+      <a href="https://www.fda.gov/drugs/cder-small-business-industry-assistance-sbia/fda-modernizes-clinical-trials-master-protocols">查看原文</a>
+    </li>
+  </ol>
+</main>
+</body>
+</html>
